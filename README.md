@@ -1,6 +1,7 @@
 # Magnetic Coil Control（磁性脂质体 + 可控磁场平台）
 
 > 状态: 进行中（软件完成，硬件未完成）
+> 分支: 三线结构中的「线圈软硬件」线（2026-08-29 拆分，git 同步 GitHub `Aris-qin/Helmholtz-coil-control`）
 
 ## 基本信息
 - **项目ID**: magnetic-coil-control
@@ -8,8 +9,19 @@
 - **类型**: 硬件/嵌入式 + 桌面 GUI 上位机
 - **语言**: Python + C
 - **创建时间**: 2026-05-14
-- **最后活跃**: 2026-05-20（软件封板）
+- **最后活跃**: 2026-08-29（模块拆分，git 化）
 - **项目根目录**: `/workspace/projects/magnetic-coil-control/`
+- **Git**: GitHub `Aris-qin/Helmholtz-coil-control`（main 分支已同步）
+
+## 三线模块结构（2026-08-29 定）
+```
+magnetic-coil-control/     ← 本仓：线圈软硬件（GitHub Helmholtz-coil-control）
+magnetic-coil-sim/         ← 模拟支线：多粒子 + COMSOL（GitHub magnetic-coil-sim，私有）
+magnetic-liposome-sci/     ← SCI 主线：夹层磁性脂质体论文（本地）
+```
+每个支线独立 git 仓库 + 独立 fact.db（进度/issue 单独追踪）。
+- 模拟支线入口：`/workspace/projects/magnetic-coil-sim/multiparticle/progress.md`
+- SCI 主线入口：`/workspace/projects/magnetic-liposome-sci/README.md`
 
 ## 核心科学问题
 开发一个**磁场可控的药物递送验证平台**：以脂质体作为载体（脂质双层内嵌 Fe3O4 磁性纳米颗粒），通过 ESP32 驱动的三轴亥姆霍兹线圈产生**震荡磁场（OMF）**和**旋转磁场（RMF）**，控制磁性脂质体的运动/释药/产热行为。
@@ -77,12 +89,7 @@ magnetic-coil-control/
 │       └── main.c               ← 主控源码（809 行）
 │
 ├── docs/
-│   ├── protocol.md              ← 串口通信协议
-│   └── literature-survey/       ← 2026-07-27 文献调研档案
-│       ├── README.md
-│       ├── pubmed_2025-07-27.json
-│       ├── corpus_existing_2025-07-27.md
-│       └── github_resources_2025-07-27.md
+│   └── protocol.md              ← 串口通信协议 v1.0
 │
 └── _archive/                    ← 归档（旧版本）
 ```
@@ -91,7 +98,8 @@ magnetic-coil-control/
 - ✅ 软件层完成（ESP32 固件 + PySide6 GUI + Python 串口库）
 - ❌ 硬件层未完成（线圈/功率放大/DAC 电路待做）
 - ✅ 通讯协议 v1.0 文档化
-- ✅ 文献调研完成（10 PubMed + 6 corpus + 12+ GitHub）
+- 📋 已知问题：DAC8555 通道寻址位错位、SPI 模式、通信协议不一致（见 `issues.md` 2026-08-27 批次）
+- 📦 模块拆分：文献调研（literature-survey）已迁至 magnetic-liposome-sci，模拟（multiparticle-sim）已迁至 magnetic-coil-sim
 
 ## 重新编译 ESP32 固件
 ```bash
