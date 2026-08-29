@@ -1,6 +1,14 @@
 # Progress
 
-Updated: 2026-07-27
+Updated: 2026-08-29
+
+## 2026-08-29 — 模块拆分 + git 化
+- 三线独立仓库建立：
+  - **本仓**（线圈软硬件）→ GitHub `Aris-qin/Helmholtz-coil-control`（main 已同步）
+  - **模拟支线** `multiparticle-sim/` → 迁至 `/workspace/projects/magnetic-coil-sim/`（GitHub `magnetic-coil-sim` 私有）
+  - **SCI 主线** `docs/literature-survey/` → 迁至 `/workspace/projects/magnetic-liposome-sci/`（本地）
+- 每支线独立 fact.db（本仓已建 `fact.db`），进度/issue 单独追踪
+- 下一步：处理 `issues.md` 2026-08-27 批次（DAC8555 寻址/SPI/通信协议）+ 双极性电路方案定型
 
 ## Now
 - 文献调研完成（2026-07-27）
